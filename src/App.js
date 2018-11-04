@@ -4,17 +4,26 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Login from './Login'
 import { CssBaseline } from '@material-ui/core'
 import 'typeface-roboto'
+import LoginRequiredRoute from './components/LoginRequiredRoute'
+import Main from './Main'
+import { account, loadAccount } from './store'
+
 if (process.env.NODE_ENV === 'development') {
   window.localStorage.debug = '装修管家:*'
 }
 
 class App extends Component {
+  componentWillMount () {
+    account.val(loadAccount())
+  }
+
   render () {
     return <div className='App'>
       <CssBaseline />
       <Router>
         <Switch>
           <Route path='/login' component={Login} />
+          <LoginRequiredRoute path='/' component={Main} />
         </Switch>
       </Router>
     </div>

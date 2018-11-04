@@ -193,27 +193,24 @@ class Login extends Component {
       }
       throw e
     }
-    try {
-      this.setState({ loading: true })
-      let { loginAsCompany: { account, error } } = await request(
-        process.env.REACT_APP_BACKEND,
-        queries.loginAsCompany,
-        R.pick(['email', 'password'], this.state))
-      if (error) {
-        this.setState({
-          errors: {
-            password: error.message
-          }
-        })
-      } else {
-        debug('login success')
+    this.setState({ loading: true })
+    let { loginAsCompany: { account, error } } = await request(
+      process.env.REACT_APP_BACKEND,
+      queries.loginAsCompany,
+      R.pick(['email', 'password'], this.state))
+    if (error) {
+      this.setState({
+        errors: {
+          password: error.message
+        }
+      })
+    } else {
+      debug('login success')
+      nextTick(() => {
+        store.saveAccount(account)
         store.account.val(account)
-        nextTick(() => {
-          this.setState({ redirectToReferrer: true })
-        })
-      }
-    } finally {
-      this.setState({ loading: false })
+        this.setState({ redirectToReferrer: true })
+      })
     }
     return false
   }
