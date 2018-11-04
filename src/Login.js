@@ -10,7 +10,6 @@ import update from 'immutability-helper'
 import * as R from 'ramda'
 import * as store from './store'
 import { Redirect } from 'react-router-dom'
-import nextTick from 'next-tick'
 
 const debug = debug_('装修管家:login')
 
@@ -52,7 +51,6 @@ const queries = {
   } 
   `
 }
-
 class Login extends Component {
   static props = {
     classes: PropTypes.object.isRequired
@@ -206,11 +204,9 @@ class Login extends Component {
       })
     } else {
       debug('login success')
-      nextTick(() => {
-        store.saveAccount(account)
-        store.account.val(account)
-        this.setState({ redirectToReferrer: true })
-      })
+      store.saveAccount(account)
+      store.account.val(account)
+      this.setState({ redirectToReferrer: true })
     }
     return false
   }

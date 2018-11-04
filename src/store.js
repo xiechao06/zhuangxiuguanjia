@@ -1,5 +1,6 @@
 import { Slot as $$ } from 'rimple'
 export const account = $$(null).tag('account')
+export const title = $$('foo').tag('title')
 
 const KEY_USER = 'USER'
 export const saveAccount = function saveAccount (account) {
@@ -12,4 +13,8 @@ export const loadAccount = function loadAccount (account) {
     user = JSON.parse(user)
   }
   return user
+}
+
+export const clearAccount = function clearAccount () {
+  window.localStorage.removeItem(KEY_USER)
 }

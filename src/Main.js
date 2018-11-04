@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
+import MainAppBar from './components/MainAppBar'
 
 class Main extends Component {
   render () {
-    return (
-      <div>
-      main
-      </div>
-    )
+    return <React.Fragment>
+      <MainAppBar />
+    </React.Fragment>
   }
 }
 
