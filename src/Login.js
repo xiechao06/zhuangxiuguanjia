@@ -212,12 +212,12 @@ class Login extends Component {
   }
 }
 
-export default withStyles(theme => ({
+export default withStyles(theme => (console.log(theme), {
   container: {
     minHeight: '100vh'
   },
   paper: {
-    padding: 2 * theme.spacing.unit,
+    padding: 4 * theme.spacing.unit,
     position: 'relative',
     minHeight: '32em'
   },

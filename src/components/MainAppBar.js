@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core'
 import connect from 'react-rimple'
 import * as store from '../store'
-import nextTick from 'next-tick'
 import { Redirect } from 'react-router-dom'
 
 import { AccountCircle, Menu as MenuIcon } from '@material-ui/icons'
@@ -55,7 +54,7 @@ class MainAppBar extends React.Component {
             <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
               <MenuIcon />
             </IconButton>
-            <Typography variant='headline' color='inherit' className={classes.grow}>
+            <Typography variant='subheading' color='inherit' className={classes.grow}>
               { title }
             </Typography>
             <div>
