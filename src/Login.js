@@ -52,7 +52,7 @@ const queries = {
   `
 }
 class Login extends Component {
-  static props = {
+  static propTypes = {
     classes: PropTypes.object.isRequired
   }
 
@@ -212,7 +212,7 @@ class Login extends Component {
   }
 }
 
-export default withStyles(theme => (console.log(theme), {
+export default withStyles(theme => ({
   container: {
     minHeight: '100vh'
   },

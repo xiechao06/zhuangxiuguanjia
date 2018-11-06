@@ -1,6 +1,7 @@
 import { Slot as $$ } from 'rimple'
 export const account = $$(null).tag('account')
-export const title = $$('foo').tag('title')
+export const title = $$('foo title').tag('title')
+export const navOpen = $$(false).tag('nav-open')
 
 const KEY_USER = 'USER'
 export const saveAccount = function saveAccount (account) {

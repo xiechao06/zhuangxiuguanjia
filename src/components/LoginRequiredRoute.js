@@ -1,4 +1,5 @@
 import { Redirect, Route } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import React from 'react'
 import connect from 'react-rimple'
@@ -22,6 +23,11 @@ const LoginRequiredRoute = function LoginRequiredRoute ({ render, component, acc
       />
     }}
   />
+}
+
+LoginRequiredRoute.propTypes = {
+  account: PropTypes.object.isRequired,
+  component: PropTypes.func.isRequired
 }
 
 export default connect({ account })(LoginRequiredRoute)

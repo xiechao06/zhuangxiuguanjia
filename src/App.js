@@ -18,9 +18,6 @@ const theme = createMuiTheme({
     primary: blue,
     secondary: pink,
     contrastTheshhold: 3
-  },
-  typography: {
-    htmlFontSize: 10
   }
 })
 

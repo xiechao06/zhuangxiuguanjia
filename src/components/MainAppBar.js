@@ -38,10 +38,13 @@ class MainAppBar extends React.Component {
     this.setState({ anchorEl: null })
   }
 
+  _openNav = () => {
+    store.navOpen.val(true)
+  }
+
   render () {
-    const { classes, title } = this.props
+    const { classes, title, open, account } = this.props
     const { anchorEl, backToLogin } = this.state
-    const open = Boolean(anchorEl)
 
     if (backToLogin) {
       return <Redirect to='/login' />
@@ -49,17 +52,23 @@ class MainAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position='static'>
+        <AppBar position='static' className={classes.appBar}>
           <Toolbar>
-            <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
-              <MenuIcon />
-            </IconButton>
+            {
+              !open && <IconButton
+                className={classes.menuButton} color='inherit' aria-label='Menu'
+                onClick={this._openNav}
+              >
+                <MenuIcon />
+              </IconButton>
+            }
+
             <Typography variant='subheading' color='inherit' className={classes.grow}>
               { title }
             </Typography>
             <div>
               <IconButton
-                aria-owns={open ? 'menu-appbar' : undefined}
+                aria-owns={anchorEl ? 'menu-appbar' : undefined}
                 aria-haspopup='true'
                 onClick={this.handleMenu}
                 color='inherit'
@@ -76,9 +85,10 @@ class MainAppBar extends React.Component {
                   vertical: 'top',
                   horizontal: 'right'
                 }}
-                open={open}
+                open={!!anchorEl}
                 onClose={this.handleClose}
               >
+                <MenuItem>{ account.email }</MenuItem>
                 <MenuItem onClick={this.handleClose}>我的信息</MenuItem>
                 <MenuItem onClick={this.logout}>登出</MenuItem>
               </Menu>
@@ -100,9 +110,13 @@ class MainAppBar extends React.Component {
 
 MainAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  account: PropTypes.object.isRequired
 }
 
 export default connect({
-  title: store.title
+  title: store.title,
+  open: store.navOpen,
+  account: store.account
 })(withStyles(styles)(MainAppBar))
